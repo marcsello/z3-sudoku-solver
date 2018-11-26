@@ -21,11 +21,38 @@ class SudokuModel:
 
 		self._symbol_table = self.__generateEmptyTable(n) # We will use this as a row major matrix as our table
 
+		# After that, we should define a symbol for each cell (we'll combine this with the 1. step of the upcoming list) (step 0)
 		# Next, we have to apply some constraints
 		# 1. all x numbers must be 1 <= x <= n
 		# 2. in every row every number must be unique
 		# 3. in every column every number must be unique
 		# 4. in every m = sqrt(n); m*m group, every number must be unique
+
+		range_constraints = [] # this is where we collect our constraints during creation
+		row_constraints = []
+		column_constraints = []
+		#group_constraints = []
+
+		# 0. and 1. steps: create symbols and apply range constraints on them
+		for y in range(0,n): # because this is a row mayor matrix, the first array contains the rows, the row's number is the y value
+			for x in range(0,n):
+				sym = Symbol("{}_{}".format(x,y),INT)
+				range_constraints += [GE(sym,Int(1)), LE(sym,Int(n))]
+				self._symbol_table[y][x] = sym
+
+
+		# 2. and 3. steps: apply row and column constraints
+		for y in range(0,n):
+			for x in range(0,n):
+				for i in range(x+1,n): # apply for row
+					constraint = self._symbol_table[y][x].NotEquals(self._symbol_table[y][i])
+					row_constraints.append(constraint)
+
+				for i in range(y+1,n): # apply for column
+					self._symbol_table[y][x].NotEquals(self._symbol_table[i][x])
+					column_constraints.append(constraint)
+
+		# step 4: apply group constraints
 
 		# TODO
 
@@ -33,7 +60,7 @@ class SudokuModel:
 		# we store those constraints as "predefinied" constraints
 		# as they are definied by the game itself
 
-		self._predefinied_constraints = []
+		self._predefinied_constraints = And(And(range_constraints),And(row_constraints),And(column_constraints))
 
 		# puzzle constraints will be used later,
 		# when we apply the constraints
