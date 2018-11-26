@@ -33,7 +33,7 @@ def main():
 
 	if solution:
 		print("Solution found!")
-		tabletools.printTable()
+		tabletools.printTable(solution)
 	else:
 		print("No solution found :(")
 

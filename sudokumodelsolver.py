@@ -11,7 +11,7 @@ def solve_soduku_model(model):
 
 		for y in range(0,model.n): # retrive the values from the sloved model
 			for x in range(0,model.n):
-				solution[y][x] = solver.get_value(model.getSymbol(self,x,y))
+				solution[y][x] = solver.get_value(model.getSymbol(x,y))
 
 		return solution
 

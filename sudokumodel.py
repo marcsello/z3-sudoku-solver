@@ -49,7 +49,7 @@ class SudokuModel:
 					row_constraints.append(constraint)
 
 				for i in range(y+1,n): # apply for column
-					self._symbol_table[y][x].NotEquals(self._symbol_table[i][x])
+					constraint = self._symbol_table[y][x].NotEquals(self._symbol_table[i][x])
 					column_constraints.append(constraint)
 
 		# step 4: apply group constraints
