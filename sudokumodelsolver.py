@@ -9,7 +9,11 @@ def solve_soduku_model(model):
 	if solver.solve(): # solution found
 		solution = tabletools.generateEmptyTable(model.n)
 
-		# TODO
+		for y in range(0,model.n): # retrive the values from the sloved model
+			for x in range(0,model.n):
+				solution[y][x] = solver.get_value(model.getSymbol(self,x,y))
+
+		return solution
 
 	else:
 		return None # couldn't solve model :(
