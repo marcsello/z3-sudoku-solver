@@ -25,7 +25,7 @@ class SudokuModel:
 		range_constraints = [] # this is where we collect our constraints during creation
 		row_constraints = []
 		column_constraints = []
-		#group_constraints = []
+		group_constraints = []
 
 		# 0. and 1. steps: create symbols and apply range constraints on them
 		for y in range(0,n): # because this is a row mayor matrix, the first array contains the rows, the row's number is the y value
@@ -48,13 +48,27 @@ class SudokuModel:
 
 		# step 4: apply group constraints
 
-		# TODO
+		group_size = int(math.sqrt(n))
+
+		for y in range(0,n):
+			for x in range(0,n):
+
+				lx = int(math.floor(x/group_size)*group_size) # Left x coordinate of the group
+				ty = int(math.floor(y/group_size)*group_size) # top y of group
+
+				rx = lx+group_size
+				by = ty+group_size
+
+				for gy in range(ty,by): # group's y
+					for gx in range(lx,rx):
+						if y != gy and x != gx:
+							group_constraints.append( self._symbol_table[y][x].NotEquals(self._symbol_table[gy][gx]) )
 
 
 		# we store those constraints as "predefinied" constraints
 		# as they are definied by the game itself
 
-		self._predefinied_constraints = And(And(range_constraints),And(row_constraints),And(column_constraints))
+		self._predefinied_constraints = And(And(range_constraints),And(row_constraints),And(column_constraints),And(group_constraints))
 
 		# puzzle constraints will be used later,
 		# when we apply the constraints
