@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
+import math
+import tabletools
 from pysmt.shortcuts import Symbol, And, GE, LE, Equals, NotEquals, Int
 from pysmt.typing import INT
 
 # This is a model of a sudoku board
 class SudokuModel:
-
-	@staticmethod
-	def __generateEmptyTable(n):
-		table = [None]*n
-		for i in range(0,n):
-			table[i] = [None]*n
-
-		return table
 
 	def __init__(self,n):
 
@@ -19,7 +13,7 @@ class SudokuModel:
 
 		# first, take a blank table
 
-		self._symbol_table = self.__generateEmptyTable(n) # We will use this as a row major matrix as our table
+		self._symbol_table = tabletools.generateEmptyTable(n) # We will use this as a row major matrix as our table
 
 		# After that, we should define a symbol for each cell (we'll combine this with the 1. step of the upcoming list) (step 0)
 		# Next, we have to apply some constraints
