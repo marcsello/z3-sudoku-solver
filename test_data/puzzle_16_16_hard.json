@@ -1,0 +1,24 @@
+{
+"n" : 16,
+"puzzle" : [
+[null,7   ,null,null, 4   ,null,10  ,null, null,13  ,null,null, null,3   ,null,null],
+[null,null,1   ,15  , null,11  ,null,9   , null,5   ,null,6   , null,null,4   ,null],
+[null,null,13  ,null, 5   ,null,3   ,null, 10  ,null,null,null, 2   ,null,null,null],
+[12  ,null,null,null, 13  ,8   ,null,null, null,null,null,null, null,null,5   ,null],
+
+[null,null,null,null, null,null,null,2   , null,15  ,null,null, 7   ,8   ,null,null],
+[null,12  ,null,14  , null,null,null,null, 2   ,null,null,8   , null,4   ,null,9   ],
+[null,null,8   ,null, null,9   ,null,11  , null,null,4   ,null, 14  ,null,12  ,null],
+[13  ,null,null,7   , 8   ,null,null,null, 5   ,1   ,null,14  , null,null,null,11  ],
+
+[null,null,null,4   , null,null,9   ,null, null,null,null,null, 3   ,6   ,null,14  ],
+[null,11  ,null,null, 2   ,12  ,null,14  , null,null,6   ,7   , 1   ,null,15  ,null],
+[null,null,null,12  , 7   ,null,5   ,null, 13  ,null,1   ,null, null,null,null,10  ],
+[null,5   ,null,6   , null,null,null,4   , 16  ,null,null,null, null,7   ,13  ,null],
+
+[null,1   ,null,null, null,null,14  ,null, null,null,null,null, null,15  ,null,null],
+[null,null,12  ,null, null,null,null,7   , null,null,null,3   , 5   ,null,null,null],
+[4   ,null,null,null, 15  ,null,null,null, null,null,7   ,null, null,null,null,null],
+[null,null,7   ,null, null,null,6   ,3   , null,4   ,null,9   , null,10  ,null,1   ]
+]
+}
