@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 import math
 import tabletools
-from pysmt.shortcuts import Symbol, And, GE, LE, Equals, NotEquals, Int
-from pysmt.typing import INT
+from z3 import *
 
 # This is a model of a sudoku board
 class SudokuModel:
@@ -30,40 +29,41 @@ class SudokuModel:
 		# 0. and 1. steps: create symbols and apply range constraints on them
 		for y in range(0,n): # because this is a row mayor matrix, the first array contains the rows, the row's number is the y value
 			for x in range(0,n):
-				sym = Symbol("{}_{}".format(x,y),INT)
-				range_constraints += [GE(sym,Int(1)), LE(sym,Int(n))]
+				sym = Int("{}_{}".format(x,y))
+				range_constraints.append( And(1 <= sym , sym <= n) )
 				self._symbol_table[y][x] = sym
 
 
 		# 2. and 3. steps: apply row and column constraints
-		for y in range(0,n):
-			for x in range(0,n):
-				for i in range(x+1,n): # apply for row
-					constraint = self._symbol_table[y][x].NotEquals(self._symbol_table[y][i])
-					row_constraints.append(constraint)
+		# Since we are using z3 api now, we can use the distinct keyword
+		for i in range(0,n):
+			# rows are simple
+			row_constraints.append( Distinct(self._symbol_table[i]) )
 
-				for i in range(y+1,n): # apply for column
-					constraint = self._symbol_table[y][x].NotEquals(self._symbol_table[i][x])
-					column_constraints.append(constraint)
+			col = []
+			# for cols we need to extract them into another array
+			for j in range(0,n):
+				col.append(self._symbol_table[j][i])
+
+			column_constraints.append( Distinct(col) )
+
 
 		# step 4: apply group constraints
-
+		# we can take advantage of the distinct keyword here as well
 		group_size = int(math.sqrt(n))
 
-		for y in range(0,n):
-			for x in range(0,n):
-
-				lx = int(math.floor(x/group_size)*group_size) # Left x coordinate of the group
-				ty = int(math.floor(y/group_size)*group_size) # top y of group
-
+		for ty in range(0,n,group_size):
+			for lx in range(0,n,group_size):
 				rx = lx+group_size
 				by = ty+group_size
 
-				for gy in range(ty,by): # group's y
-					for gx in range(lx,rx):
-						if y != gy and x != gx:
-							group_constraints.append( self._symbol_table[y][x].NotEquals(self._symbol_table[gy][gx]) )
+				group = []
 
+				for y in range(ty,by): # group's y
+					for x in range(lx,rx):
+						group.append(self._symbol_table[y][x])
+
+				group_constraints.append( Distinct(group) )
 
 		# we store those constraints as "predefinied" constraints
 		# as they are definied by the game itself
@@ -84,7 +84,7 @@ class SudokuModel:
 				num = row[x]
 
 				if num: # not None
-					puzzle_constraint_list.append( self.getSymbol(x,y).Equals(Int(num)) ) # all we do is create constraints that a number must be equal with the value we predefinied
+					puzzle_constraint_list.append( self.getSymbol(x,y) == num ) # all we do is create constraints that a number must be equal with the value we predefinied
 
 		self._puzzle_constraints = And(puzzle_constraint_list) # we combine all those individual constraints with a big "AND" operator
 
