@@ -1,0 +1,24 @@
+{
+"n" : 16,
+"puzzle" : [
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null],
+[null,null,null,null, null,null,null,null, null,null,null,null, null,null,null,null]
+]
+}
