@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import math
 import tabletools
-from pysmt.shortcuts import Symbol, And, GE, LE, Equals, NotEquals, Int
+from pysmt.shortcuts import Symbol, And, GE, LE, NotEquals, Int
 from pysmt.typing import INT
 
 # This is a model of a sudoku board
